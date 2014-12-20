@@ -67,8 +67,8 @@ define(function () {
 	}
 
 
-	if (QUnit) {
-		var mark;
+	if (typeof QUnit != 'undefined') {
+		var mark
 
 		function getTime() {
 			return new Date().getTime()
@@ -88,7 +88,6 @@ define(function () {
 			assert.expect(10)
 			var done = assert.async()
 			markTime()
-
 
 			var timer = new Timer({
 				interval: 100,
