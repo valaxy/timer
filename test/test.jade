@@ -1,0 +1,19 @@
+doctype html
+html
+    head
+        meta(charset="utf-8")
+        title QUnit test page
+        link(rel="stylesheet" href="../bower_components/qunit/qunit/qunit.css")
+    body
+        div#qunit
+        div#qunit-fixture
+
+        script(src="../bower_components/qunit/qunit/qunit.js")
+        script(src="../bower_components/seajs/dist/sea.js")
+        script.
+            seajs.config({
+                base: './'
+            })
+            seajs.use(['test'], function (test) {
+                test.init()
+            })

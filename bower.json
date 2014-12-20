@@ -9,5 +9,9 @@
     "**/.*",
     "node_modules",
     "bower_components"
-  ]
+  ],
+  "devDependencies": {
+    "qunit": "~1.16.0",
+    "seajs": "~2.3.0"
+  }
 }
