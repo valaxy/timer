@@ -2,9 +2,10 @@ define(function () {
 
 	/**
 	 * Control executing task repeatedly under a interval time.
+	 * @constructor Timer
 	 * @param options
-	 *  - immediate: a bool, whether execute the task at once, default is false
-	 *  - interval: a number, the interval time between tasks, default is 1000
+	 *  - immediate: a bool, whether execute the task at once, default is false <br/>
+	 *  - interval: a number, the interval time between tasks, default is 1000 <br/>
 	 *  - task: a function about the task, call `this.next()` to end current task and begin to run next task
 	 */
 	var Timer = function (options) {
@@ -26,7 +27,10 @@ define(function () {
 
 
 	/**
-	 * Start the timer or restart after stopping
+	 * Start the timer or restart after stopping.
+	 * @function start
+	 * @memberof Timer
+	 * @instance
 	 */
 	Timer.prototype.start = function () {
 		this._startTimePoint = new Date().getTime()
@@ -40,7 +44,10 @@ define(function () {
 
 
 	/**
-	 * Stop the timer after starting
+	 * Stop the timer after starting.
+	 * @function stop
+	 * @memberof Timer
+	 * @instance
 	 */
 	Timer.prototype.stop = function () {
 		this._waitTime = this._options.interval - (new Date().getTime() - this._startTimePoint)
@@ -51,7 +58,10 @@ define(function () {
 	/**
 	 * Resume the timer After starting, the difference between start and resume is:
 	 * if there is a task has a interval 1000ms bug stop at 400ms, resume will go-on-wait other 600ms to execute the task
-	 * start has to wait the whole 1000ms to execute the next task
+	 * start has to wait the whole 1000ms to execute the next task.
+	 * @function resume
+	 * @memberof Timer
+	 * @instance
 	 */
 	Timer.prototype.resume = function () {
 		this._startTimePoint = new Date().getTime()
@@ -61,6 +71,9 @@ define(function () {
 
 	/**
 	 * When your task is over, call this method to run next task at next time point
+	 * @function next
+	 * @memberof Timer
+	 * @instance
 	 */
 	Timer.prototype.next = function () {
 		this._handler = setTimeout(this._options.task.bind(this), this._options.interval)
