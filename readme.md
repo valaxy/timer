@@ -17,16 +17,5 @@ timer.js is a utility to use setTimeout easily.
     timer.stop()
 
 # Introduction
-- Timer
-
-
-    var timer = new Timer({
-        task: function() { ... },
-        immediate: false,
-        interval: 1000
-    })
-
-- start()
-- stop()
-- resume()
-- next()
+Timer is under CMD package, make you use setTimeout easily.  
+API detail to see [Timer](valaxy.github.io/timer.js/doc/Timer.html)
