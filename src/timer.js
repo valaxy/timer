@@ -36,7 +36,7 @@ define(function () {
 		this._startTimePoint = new Date().getTime()
 		this._waitTime = null
 		if (this._options.immediate) {
-			this._options.task()
+			this._options.task.apply(this)
 		} else {
 			this._handler = setTimeout(this._options.task.bind(this), this._options.interval)
 		}
@@ -122,11 +122,19 @@ define(function () {
 		QUnit.test('immediately execute', function (assert) {
 			markTime()
 			var done = assert.async()
+			var count = 0
 			var timer = new Timer({
 				immediate: true,
 				task: function () {
-					assertTimePoint(assert, 0, 10) // execute at 0ms
-					done()
+					count++
+					if (count == 1) {
+						assertTimePoint(assert, 0, 10) // execute at 0ms
+						this.next() // test this.next()
+					} else {
+						assertTimePoint(assert, 1000, 20)
+						done()
+					}
+
 				}
 			})
 			timer.start()
