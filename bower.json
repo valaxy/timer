@@ -1,6 +1,6 @@
 {
   "name": "timer-doc",
-  "version": "0.1",
+  "version": "0.0.2",
   "authors": [
     "valaxy <valaxy.tian@gmail.com>"
   ],
@@ -11,6 +11,6 @@
     "bower_components"
   ],
   "dependencies": {
-    "interval": "https://github.com/valaxy/timer.js.git"
+    "timer": "https://github.com/valaxy/timer.js.git"
   }
 }
