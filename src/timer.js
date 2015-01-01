@@ -62,6 +62,9 @@ define(function () {
 
 	/**
 	 * execute the task immediately, and after executing reset timer
+	 * @function immediate
+	 * @memberof Timer
+	 * @instance
 	 */
 	Timer.prototype.immediate = function () {
 		this.stop()
