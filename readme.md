@@ -28,5 +28,5 @@ timer.stop()
 timer.immediate()
 ```
 
-# Introduction
+# API
 API detail see [Timer](http://valaxy.github.io/timer/doc/Timer.html)
