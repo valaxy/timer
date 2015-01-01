@@ -4,7 +4,6 @@ define(function () {
 	 * Control executing task repeatedly under a interval time.
 	 * @constructor Timer
 	 * @param options
-	 *  - immediate: a bool, whether execute the task at once, default is false <br/>
 	 *  - interval: a number, the interval time between tasks, default is 1000 <br/>
 	 *  - task: a function about the task, call `this.next()` to end current task and begin to run next task
 	 */
@@ -17,28 +16,24 @@ define(function () {
 		}
 		this._options = {
 			task: options.task, // must be exist
-			immediate: (typeof options.immediate != 'undefined') ? options.immediate : false,
 			interval: (typeof options.interval != 'undefined') ? options.interval : 1000
 		}
-		this._handler = null        // setTimeout handler
-		this._startTimePoint = -1   // start time point of last task
-		this._waitTime = null      // wait time of next task
+		this._handler = null   // setTimeout handler
 	}
 
 
 	/**
 	 * Start the timer or restart after stopping.
+	 * @param immediate a bool, whether execute the task at once, default is false
 	 * @function start
 	 * @memberof Timer
 	 * @instance
 	 */
-	Timer.prototype.start = function () {
-		this._startTimePoint = new Date().getTime()
-		this._waitTime = null
-		if (this._options.immediate) {
+	Timer.prototype.start = function (immediate) {
+		if (immediate) {
 			this._options.task.apply(this)
 		} else {
-			this._handler = setTimeout(this._options.task.bind(this), this._options.interval)
+			this.next()
 		}
 	}
 
@@ -50,22 +45,7 @@ define(function () {
 	 * @instance
 	 */
 	Timer.prototype.stop = function () {
-		this._waitTime = this._options.interval - (new Date().getTime() - this._startTimePoint)
 		clearTimeout(this._handler)
-	}
-
-
-	/**
-	 * Resume the timer After starting, the difference between start and resume is:
-	 * if there is a task has a interval 1000ms bug stop at 400ms, resume will go-on-wait other 600ms to execute the task
-	 * start has to wait the whole 1000ms to execute the next task.
-	 * @function resume
-	 * @memberof Timer
-	 * @instance
-	 */
-	Timer.prototype.resume = function () {
-		this._startTimePoint = new Date().getTime()
-		this._handler = setTimeout(this._options.task.bind(this), this._waitTime)
 	}
 
 
@@ -77,6 +57,15 @@ define(function () {
 	 */
 	Timer.prototype.next = function () {
 		this._handler = setTimeout(this._options.task.bind(this), this._options.interval)
+	}
+
+
+	/**
+	 * execute the task immediately, and after executing reset timer
+	 */
+	Timer.prototype.immediate = function () {
+		this.stop()
+		this._options.task.apply(this)
 	}
 
 
@@ -119,12 +108,11 @@ define(function () {
 			timer.start()
 		})
 
-		QUnit.test('immediately execute', function (assert) {
+		QUnit.test('immediately start', function (assert) {
 			markTime()
 			var done = assert.async()
 			var count = 0
 			var timer = new Timer({
-				immediate: true,
 				task: function () {
 					count++
 					if (count == 1) {
@@ -137,27 +125,9 @@ define(function () {
 
 				}
 			})
-			timer.start()
+			timer.start(true)
 		})
 
-
-		QUnit.test('stop and resume', function (assert) {
-			markTime()
-			var done = assert.async()
-			var timer = new Timer({
-				task: function () {
-					assertTimePoint(assert, 1000, 10) // execute at 1000ms
-					done()
-				}
-			})
-
-			timer.start()
-
-			setTimeout(function () {
-				timer.stop()
-				timer.resume()
-			}, 400)
-		})
 
 		QUnit.test('stop and restart', function (assert) {
 			markTime()
@@ -174,6 +144,29 @@ define(function () {
 			setTimeout(function () {
 				timer.stop()
 				timer.start()
+			}, 400)
+		})
+
+
+		QUnit.test('immediate task after start', function (assert) {
+			markTime()
+			var done = assert.async()
+			var count = 0
+			var timer = new Timer({
+				task: function () {
+					count++
+					if (count == 1) {
+						assertTimePoint(assert, 400, 10)
+						this.next()
+					} else {
+						assertTimePoint(assert, 1400, 20)
+						done()
+					}
+				}
+			})
+
+			setTimeout(function () {
+				timer.immediate()
 			}, 400)
 		})
 	}
