@@ -9,11 +9,11 @@ html
         div#qunit-fixture
 
         script(src="../bower_components/qunit/qunit/qunit.js")
-        script(src="../bower_components/seajs/dist/sea.js")
+        script(src="../bower_components/seajs/dist/sea.js")  
         script.
             seajs.config({
-                base: './'
+                base: '../'
             })
-            seajs.use(['test'], function (test) {
+            seajs.use(['./test'], function (test) {
                 test.init()
             })
