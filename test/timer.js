@@ -16,6 +16,8 @@ define(function (require) {
 		assert.ok(Math.abs(now - standard) < tolerateError, 'time point is ' + now) // under tolerateError ms
 	}
 
+	QUnit.module('Timer')
+
 
 	QUnit.test('start and stop', function (assert) {
 		assert.expect(10)
@@ -24,7 +26,7 @@ define(function (require) {
 
 		var timer = new Timer({
 			interval: 100,
-			task: function () {
+			task    : function () {
 				assertTimePoint(assert, 100, 20) // under 5ms error
 				markTime()
 				this.next()
@@ -84,21 +86,28 @@ define(function (require) {
 		var done = assert.async()
 		var count = 0
 		var timer = new Timer({
-			task: function () {
+			interval: 1000,
+			task    : function () {
 				count++
 				if (count == 1) {
 					assertTimePoint(assert, 400, 10)
 					this.next()
 				} else {
-					assertTimePoint(assert, 1400, 20)
-					done()
+					assert.throws("can not be here")
 				}
 			}
 		})
 
+		timer.start()
+
 		setTimeout(function () {
 			timer.immediate()
 		}, 400)
+
+		setTimeout(function () {
+			timer.stop()
+			done()
+		}, 2200)
 	})
 
 })

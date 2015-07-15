@@ -15,9 +15,10 @@ define(function () {
 			throw "Not set option.task, pass a function to option.task"
 		}
 		this._options = {
-			task: options.task, // must be exist
+			task    : options.task, // must be exist
 			interval: (typeof options.interval != 'undefined') ? options.interval : 1000
 		}
+		this._isEnd = true
 		this._handler = null   // setTimeout handler
 	}
 
@@ -30,8 +31,9 @@ define(function () {
 	 * @instance
 	 */
 	Timer.prototype.start = function (immediate) {
+		this._isEnd = false
 		if (immediate) {
-			this._options.task.apply(this)
+			this._options.task.call(this)
 		} else {
 			this.next()
 		}
@@ -45,7 +47,8 @@ define(function () {
 	 * @instance
 	 */
 	Timer.prototype.stop = function () {
-		clearTimeout(this._handler)
+		this._isEnd = true
+		clearTimeout(this._handler) // may not use
 	}
 
 
@@ -56,7 +59,12 @@ define(function () {
 	 * @instance
 	 */
 	Timer.prototype.next = function () {
-		this._handler = setTimeout(this._options.task.bind(this), this._options.interval)
+		var me = this
+		this._handler = setTimeout(function () {
+			if (!me._isEnd) {
+				me._options.task.call(me)
+			}
+		}, this._options.interval)
 	}
 
 
@@ -68,7 +76,7 @@ define(function () {
 	 */
 	Timer.prototype.immediate = function () {
 		this.stop()
-		this._options.task.apply(this)
+		this._options.task.call(this)
 	}
 
 

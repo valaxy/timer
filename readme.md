@@ -2,7 +2,7 @@ timer is tiny async utility, to seek a more powerful async tool, see [async](htt
 
 # Introduction
 Timer is a async class that control a task to execute repeatedly.
-File timer.js is for AMD or CMD package, to see what is [CMD](https://github.com/cmdjs/specification/blob/master/draft/module.md)
+File `src/timer.js` is AMD or CMD package
 
 # Example
 
