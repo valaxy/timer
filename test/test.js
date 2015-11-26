@@ -1,5 +1,3 @@
-define(function (require, exports) {
-	exports.init = function () {
-		require('./timer')
-	}
+define(function (require) {
+	require('./timer')
 })
