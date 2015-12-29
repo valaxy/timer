@@ -1,13 +1,14 @@
-Timer is tiny async utility, seek for a more powerful async tool, see [async](https://github.com/caolan/async)
+Timer is tiny async utility, to seek for more powerful async tool, see [async](https://github.com/caolan/async)
 
 # Introduction
-Timer is a async class that control a task to execute repeatedly.
-File `src/timer.js` is AMD package
+Timer controls a task to execute repeatedly.    
+Module `src/timer` is CommonJS package        
+AMD user check [valaxy/cjs](https://github.com/valaxy/cjs)
 
 # Example
 
 ```javascript
-var Timer = require('./src/timer')
+var Timer = require('timer')
 
 // instantiate a Timer
 var timer = new Timer({

@@ -1,0 +1,20 @@
+{
+  "name": "timer",
+  "version": "1.1.0",
+  "main": "src/timer.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/valaxy/timer.git"
+  },
+  "author": "valaxy",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/valaxy/timer/issues"
+  },
+  "homepage": "https://github.com/valaxy/timer#readme",
+  "devDependencies": {
+    "cjs": "github:valaxy/cjs",
+    "qunitjs": "^1.20.0",
+    "requirejs": "^2.1.22"
+  }
+}

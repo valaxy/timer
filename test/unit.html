@@ -3,19 +3,23 @@
 <head>
     <meta charset="utf-8">
     <title>QUnit test</title>
-    <link rel="stylesheet" href="../bower_components/qunit/qunit/qunit.css">
+    <link rel="stylesheet" href="../node_modules/qunitjs/qunit/qunit.css">
 </head>
 <body>
     <div id="qunit"></div>
     <div id="qunit-fixture"></div>
-    <script src="../bower_components/qunit/qunit/qunit.js"></script>
-    <script src="../bower_components/requirejs/require.js"></script>
+    <script src="../node_modules/qunitjs/qunit/qunit.js"></script>
+    <script src="../node_modules/requirejs/require.js"></script>
     <script>
         require.config({
-            baseUrl: '../'
+            baseUrl: '../',
+            paths  : {
+                'cjs'       : 'node_modules/cjs/cjs',
+                'amd-loader': 'node_modules/amd-loader/amd-loader'
+            }
         })
         QUnit.config.autostart = false
-        require(['test/test'], function () {
+        require(['cjs!test/test'], function () {
             QUnit.start()
         })
     </script>
