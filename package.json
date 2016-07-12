@@ -13,8 +13,8 @@
   },
   "homepage": "https://github.com/valaxy/timer#readme",
   "devDependencies": {
-    "cjs": "github:valaxy/cjs",
-    "qunitjs": "^1.20.0",
-    "requirejs": "^2.1.22"
+    "cjs": "github:valaxy/cjs#e3fb03abf7ed5e58adf0e54dfec01bf4bf65bd2e",
+    "qunitjs": "^2.0.0",
+    "requirejs": "^2.2.0"
   }
 }
