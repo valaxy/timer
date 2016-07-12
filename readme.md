@@ -1,5 +1,6 @@
 [![Dependency Status](https://david-dm.org/valaxy/timer.svg?style=flat-square)](https://david-dm.org/valaxy/timer)
 [![devDependency Status](https://david-dm.org/valaxy/timer/dev-status.svg?style=flat-square)](https://david-dm.org/valaxy/timer#info=devDependencies)
+
 Timer is tiny async utility, to seek for more powerful async tool, see [async](https://github.com/caolan/async)
 
 # Introduction
