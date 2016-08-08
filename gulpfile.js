@@ -5,9 +5,7 @@ const ts = require('gulp-typescript')
 gulp.task('build', () => {
 	return gulp
 		.src([
-			'**/*.ts',
-			'!dest/**/*.ts',
-			'!node_moduels/**/*.ts'
+			'src/**/*.ts'
 		])
 		.pipe(ts({
 			module                : "commonjs",

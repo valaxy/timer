@@ -1,20 +1,12 @@
 {
   "name": "timer",
   "version": "1.1.0",
-  "main": "src/timer.js",
+  "main": "dest/timer.js",
   "scripts": {
-    "build": "gulp build"
+    "build": "echo begin to build timer & gulp build",
+    "postinstall": "gulp build"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/valaxy/timer.git"
-  },
-  "author": "valaxy",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/valaxy/timer/issues"
-  },
-  "homepage": "https://github.com/valaxy/timer#readme",
   "devDependencies": {
     "cjs": "github:valaxy/cjs#e3fb03abf7ed5e58adf0e54dfec01bf4bf65bd2e",
     "gulp": "^3.9.1",
