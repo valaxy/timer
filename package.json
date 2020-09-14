@@ -1,10 +1,9 @@
 {
   "name": "valaxy-timer",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "main": "./src/timer.ts",
   "scripts": {
     "build": "echo begin to build timer & gulp build",
-    "postinstall": "gulp build",
     "test": "mocha --require ts-node/register test/index.test.ts"
   },
   "license": "MIT",
