@@ -1,17 +1,21 @@
 {
-  "name": "timer",
-  "version": "1.1.0",
-  "main": "dest/timer.js",
+  "name": "valaxy-timer",
+  "version": "2.0.0",
+  "main": "./src/timer.ts",
   "scripts": {
     "build": "echo begin to build timer & gulp build",
-    "postinstall": "gulp build"
+    "postinstall": "gulp build",
+    "test": "mocha --require ts-node/register test/index.test.ts"
   },
   "license": "MIT",
   "devDependencies": {
-    "cjs": "github:valaxy/cjs#e3fb03abf7ed5e58adf0e54dfec01bf4bf65bd2e",
+    "@types/chai": "^4.2.12",
+    "@types/mocha": "^8.0.3",
+    "chai": "^4.2.0",
     "gulp": "^3.9.1",
     "gulp-typescript": "^2.13.6",
-    "qunitjs": "^2.0.0",
-    "requirejs": "^2.2.0"
+    "mocha": "^8.1.3",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.2"
   }
 }

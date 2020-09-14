@@ -1,10 +1,9 @@
-import Task = require('./task')
+import { Task } from './task'
 
-
-class Timer {
+export class Timer {
     private _fn
     private _interval
-    private _task:Task
+    private _task: Task
 
     /**
      * Control executing task repeatedly under a interval time.
@@ -14,12 +13,17 @@ class Timer {
      *  - task(next): a function about the task, call `next()` to end current task and begin to run next task
      *      - next: a function, when your task is over, call this method to run next task at next time point
      */
-    constructor(options) {
-        options = options || {}
-        if (typeof options.task == 'undefined') throw new Error("Not set option.task, pass a function to option.task")
+    constructor(options: {
+        task: Function,
+        interval?: number,
+    }) {
+        if (typeof options.task == 'undefined') {
+            throw new Error("Not set option.task, pass a function to option.task")
+        }
+
         this._fn = options.task // must be exist
         this._interval = (typeof options.interval != 'undefined') ? options.interval : 1000
-        this._task     = null
+        this._task = null
     }
 
     /**
@@ -30,14 +34,16 @@ class Timer {
      * @memberof Timer
      * @instance
      */
-    start(options?) {
+    start(options: {
+        immediate?: boolean
+    } = {}) {
         if (this._task !== null) return
         this._task = new Task({
-            fn      : this._fn,
+            fn: this._fn,
             interval: this._interval
         })
 
-        options           = options || {}
+        options = options || {}
         options.immediate = typeof options.immediate == 'undefined' ? false : options.immediate
         this._task.exec(options)
     }
@@ -69,7 +75,3 @@ class Timer {
         })
     }
 }
-
-
-
-export = Timer
